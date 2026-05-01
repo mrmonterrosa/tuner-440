@@ -1,10 +1,12 @@
-<main class="flex-1 flex flex-col items-center justify-center px-container-margin pt-16 pb-20 overflow-y-auto min-h-screen w-full max-w-md mx-auto">
+<section class="flex-1 flex flex-col items-center justify-center px-container-margin pt-16 pb-20 overflow-y-auto min-h-screen w-full max-w-md mx-auto" aria-label="Metrónomo">
   
   <!-- Visual Beat Indicators (Compact at top) -->
-  <div class="flex gap-3 mb-8">
+  <div class="flex gap-3 mb-8" role="group" aria-label="Indicadores de pulso">
     <div *ngFor="let beat of [].constructor(timeSignature()); let i = index" 
          class="w-3 h-3 rounded-full transition-all duration-75"
-         [ngClass]="isPlaying() && currentBeat() === i ? (i === 0 ? 'bg-primary shadow-[0_0_15px_#54e98a]' : 'bg-secondary-container shadow-[0_0_10px_#3398db]') : 'bg-surface-container-high'">
+         [ngClass]="isPlaying() && currentBeat() === i ? (i === 0 ? 'bg-primary shadow-[0_0_15px_#54e98a]' : 'bg-secondary-container shadow-[0_0_10px_#3398db]') : 'bg-surface-container-high'"
+         [attr.aria-label]="'Pulso ' + (i + 1)"
+         role="status">
     </div>
   </div>
 
@@ -14,51 +16,68 @@
     <!-- BPM Controls -->
     <div class="flex items-center justify-between w-full mb-8">
       <button class="w-12 h-12 flex items-center justify-center rounded-full bg-surface-container hover:bg-surface-container-high text-zinc-400 hover:text-zinc-100 transition-colors"
-              (click)="setBpm(bpm() - 1)">
-        <span class="material-symbols-outlined text-2xl">remove</span>
+              (click)="setBpm(bpm() - 1)"
+              aria-label="Disminuir BPM">
+        <span class="material-symbols-outlined text-2xl" aria-hidden="true">remove</span>
       </button>
       
-      <div class="flex flex-col items-center justify-center">
+      <div class="flex flex-col items-center justify-center" role="status" aria-live="polite" aria-atomic="true">
         <span class="font-display-pitch text-[72px] font-bold tracking-tighter leading-none" [ngClass]="isPlaying() ? 'text-primary' : 'text-zinc-100'">{{ bpm() }}</span>
         <span class="font-label-caps tracking-widest text-zinc-500 mt-1">BPM</span>
       </div>
 
       <button class="w-12 h-12 flex items-center justify-center rounded-full bg-surface-container hover:bg-surface-container-high text-zinc-400 hover:text-zinc-100 transition-colors"
-              (click)="setBpm(bpm() + 1)">
-        <span class="material-symbols-outlined text-2xl">add</span>
+              (click)="setBpm(bpm() + 1)"
+              aria-label="Aumentar BPM">
+        <span class="material-symbols-outlined text-2xl" aria-hidden="true">add</span>
       </button>
     </div>
 
     <!-- Slider directly under BPM -->
     <div class="w-full relative py-2 mb-10">
-      <div class="absolute top-1/2 -translate-y-1/2 left-0 right-0 h-1.5 bg-surface-container-highest rounded-full pointer-events-none"></div>
+      <div class="absolute top-1/2 -translate-y-1/2 left-0 right-0 h-1.5 bg-surface-container-highest rounded-full pointer-events-none" aria-hidden="true"></div>
       <div class="absolute top-1/2 -translate-y-1/2 left-0 h-1.5 bg-secondary-container rounded-full pointer-events-none" 
-           [style.width]="'calc(12px + (100% - 24px) * ' + ((bpm() - 40) / 210) + ')'"></div>
+           [style.width]="'calc(12px + (100% - 24px) * ' + ((bpm() - 40) / 210) + ')'" aria-hidden="true"></div>
       <input class="w-full h-1.5 bg-transparent rounded-full appearance-none cursor-pointer relative z-10" 
              style="background: transparent;"
              max="250" min="40" type="range" 
              [value]="bpm()" 
-             (input)="onBpmChange($event)"/>
+             (input)="onBpmChange($event)"
+             aria-label="Velocidad en BPM"
+             [attr.aria-valuenow]="bpm()"
+             aria-valuemin="40"
+             aria-valuemax="250"/>
     </div>
 
     <!-- Central Play/Pause Button -->
     <button class="w-16 h-16 rounded-[9999px] flex items-center justify-center shadow-lg active:scale-95 transition-transform" 
             [ngClass]="isPlaying() ? 'bg-error text-white shadow-[0_0_20px_rgba(255,180,171,0.2)]' : 'bg-primary text-on-primary shadow-[0_0_20px_rgba(84,233,138,0.2)]'"
-            (click)="togglePlay()">
-      <span class="material-symbols-outlined text-3xl">{{ isPlaying() ? 'pause' : 'play_arrow' }}</span>
+            (click)="togglePlay()"
+            [attr.aria-label]="isPlaying() ? 'Pausar metrónomo' : 'Iniciar metrónomo'"
+            [attr.aria-pressed]="isPlaying()">
+      <span class="material-symbols-outlined text-3xl" aria-hidden="true">{{ isPlaying() ? 'pause' : 'play_arrow' }}</span>
     </button>
   </div>
 
   <!-- Time Signature Selector (Pills below) -->
-  <div class="w-full flex justify-center gap-3 mt-8">
+  <div class="w-full flex justify-center gap-3 mt-8" role="radiogroup" aria-label="Compás">
     <button (click)="setTimeSignature(3)"
             [ngClass]="timeSignature() === 3 ? 'bg-secondary-container/20 border-secondary-container text-secondary' : 'bg-surface-container hover:bg-surface-container-high border-transparent text-zinc-500'"
-            class="px-5 py-1.5 border-2 rounded-full font-bold text-sm tracking-widest transition-colors">3/4</button>
+            class="px-5 py-1.5 border-2 rounded-full font-bold text-sm tracking-widest transition-colors"
+            role="radio"
+            [attr.aria-checked]="timeSignature() === 3"
+            aria-label="Compás 3/4">3/4</button>
     <button (click)="setTimeSignature(4)"
             [ngClass]="timeSignature() === 4 ? 'bg-secondary-container/20 border-secondary-container text-secondary' : 'bg-surface-container hover:bg-surface-container-high border-transparent text-zinc-500'"
-            class="px-5 py-1.5 border-2 rounded-full font-bold text-sm tracking-widest transition-colors">4/4</button>
+            class="px-5 py-1.5 border-2 rounded-full font-bold text-sm tracking-widest transition-colors"
+            role="radio"
+            [attr.aria-checked]="timeSignature() === 4"
+            aria-label="Compás 4/4">4/4</button>
     <button (click)="setTimeSignature(6)"
             [ngClass]="timeSignature() === 6 ? 'bg-secondary-container/20 border-secondary-container text-secondary' : 'bg-surface-container hover:bg-surface-container-high border-transparent text-zinc-500'"
-            class="px-5 py-1.5 border-2 rounded-full font-bold text-sm tracking-widest transition-colors">6/8</button>
+            class="px-5 py-1.5 border-2 rounded-full font-bold text-sm tracking-widest transition-colors"
+            role="radio"
+            [attr.aria-checked]="timeSignature() === 6"
+            aria-label="Compás 6/8">6/8</button>
   </div>
-</main>
+</section>

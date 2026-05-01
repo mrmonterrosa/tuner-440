@@ -1,4 +1,4 @@
-<main class="flex-grow pt-24 pb-32 px-container-margin max-w-4xl mx-auto w-full min-h-screen">
+<section class="flex-grow pt-24 pb-32 px-container-margin max-w-4xl mx-auto w-full min-h-screen" aria-label="Biblioteca de afinaciones">
   <header class="mb-lg">
     <h1 class="font-headline-lg text-headline-lg text-zinc-100 mb-xs">Biblioteca</h1>
     <p class="font-body-md text-zinc-500">Presets de afinación profesionales para guitarra.</p>
@@ -36,7 +36,7 @@
     </div>
 
     <!-- Add Custom -->
-    <div (click)="openCustomModal()" class="border-2 border-dashed border-zinc-800 rounded-xl p-md flex items-center justify-center hover:border-zinc-600 hover:bg-white/[0.05] hover:scale-[1.02] transition-all cursor-pointer group min-h-[140px]">
+    <div (click)="openCustomModal()" class="border-2 border-dashed border-zinc-800 rounded-xl p-md flex items-center justify-center hover:border-zinc-600 hover:bg-white/[0.05] hover:scale-[1.02] transition-all cursor-pointer group min-h-[140px]" role="button" tabindex="0" aria-label="Crear afinación personalizada" (keydown.enter)="openCustomModal()" (keydown.space)="openCustomModal()">
       <div class="text-center">
         <span class="material-symbols-outlined text-zinc-600 group-hover:text-primary group-hover:shadow-[0_0_15px_rgba(84,233,138,0.4)] rounded-full transition-all mb-2 block text-3xl" data-icon="add_circle">add_circle</span>
         <span class="font-label-caps text-label-caps text-zinc-600 group-hover:text-zinc-300 transition-colors">CREAR PERSONALIZADA</span>
@@ -48,7 +48,7 @@
   <!-- Featured Section Asymmetric -->
   <section class="mt-xl grid grid-cols-1 lg:grid-cols-3 gap-md">
     <div class="lg:col-span-2 relative overflow-hidden rounded-xl h-64 group">
-      <img alt="Guitarist in low light" class="absolute inset-0 w-full h-full object-cover opacity-40 group-hover:scale-105 transition-transform duration-700" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBJ5IEusf_ATxFo-pqMceqjfZ8KEM9qzLqIOBnbjvqyyFtw_noO7gKj5y0USg7zy8DEB6p6Vu_mQfGFYV5mSZP66ITwVRVbMGFOGGYkKvvS3kLfhaAf0ukV801MIGvJQngls1tlZiNNDgDD586WVatWj8EhuBkET3ubGe2Q2cS8I9QVgTAjpxdFJmtVjy-A6YOdYdM-cW_nL23qri0xOdvey6pXGKo8DdEN7ZGYdqIFBvpk29XTBnMNEkZcS4NmiHRjoOw9otPSizM"/>
+      <img alt="Guitarrista afinando en un ambiente de estudio con baja iluminación" class="absolute inset-0 w-full h-full object-cover opacity-40 group-hover:scale-105 transition-transform duration-700" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBJ5IEusf_ATxFo-pqMceqjfZ8KEM9qzLqIOBnbjvqyyFtw_noO7gKj5y0USg7zy8DEB6p6Vu_mQfGFYV5mSZP66ITwVRVbMGFOGGYkKvvS3kLfhaAf0ukV801MIGvJQngls1tlZiNNDgDD586WVatWj8EhuBkET3ubGe2Q2cS8I9QVgTAjpxdFJmtVjy-A6YOdYdM-cW_nL23qri0xOdvey6pXGKo8DdEN7ZGYdqIFBvpk29XTBnMNEkZcS4NmiHRjoOw9otPSizM" loading="lazy" width="800" height="256"/>
       <div class="absolute inset-0 bg-gradient-to-t from-background to-transparent flex flex-col justify-end p-md">
         <span class="font-label-caps text-label-caps text-primary mb-2">TIPS DE PRECISIÓN</span>
         <h2 class="font-headline-md text-headline-md text-zinc-100">Optimiza tu Afinación</h2>
@@ -59,25 +59,25 @@
       <span class="material-symbols-outlined text-secondary text-4xl mb-sm" data-icon="auto_awesome" style="font-variation-settings: 'FILL' 1;">auto_awesome</span>
       <h3 class="font-headline-md text-headline-md text-zinc-100 mb-xs">Presets Premium</h3>
       <p class="font-body-md text-zinc-400">Desbloquea afinaciones microtonales y presets de artistas legendarios.</p>
-      <button class="mt-md bg-secondary-container text-on-secondary-container font-label-caps py-3 rounded-lg hover:opacity-90 transition-opacity">
+      <button class="mt-md bg-secondary-container text-on-secondary-container font-label-caps py-3 rounded-lg hover:opacity-90 transition-opacity" aria-label="Ver más presets premium">
         VER MÁS
       </button>
     </div>
   </section>
-</main>
+</section>
 
 <!-- Custom Tuning Modal -->
-<div *ngIf="showCustomModal()" class="fixed inset-0 z-[100] flex items-center justify-center bg-black/80 backdrop-blur-sm px-4">
+<div *ngIf="showCustomModal()" class="fixed inset-0 z-[100] flex items-center justify-center bg-black/80 backdrop-blur-sm px-4" role="dialog" aria-modal="true" aria-labelledby="modal-title">
   <div class="bg-surface-container border border-zinc-800 rounded-2xl p-6 w-full max-w-md shadow-2xl relative overflow-hidden">
     
     <!-- Main Form -->
     <div [class.opacity-0]="pickingNoteForIndex !== null" [class.pointer-events-none]="pickingNoteForIndex !== null" class="transition-opacity duration-200">
-      <button (click)="closeModal()" class="absolute top-4 right-4 w-8 h-8 flex items-center justify-center rounded-full bg-surface-container-high text-zinc-400 hover:text-zinc-100 transition-colors">
-        <span class="material-symbols-outlined text-xl">close</span>
+      <button (click)="closeModal()" class="absolute top-4 right-4 w-8 h-8 flex items-center justify-center rounded-full bg-surface-container-high text-zinc-400 hover:text-zinc-100 transition-colors" aria-label="Cerrar modal">
+        <span class="material-symbols-outlined text-xl" aria-hidden="true">close</span>
       </button>
       
-      <h2 class="font-headline-md text-2xl text-zinc-100 mb-6 flex items-center gap-2">
-        <span class="material-symbols-outlined text-primary">tune</span>
+      <h2 id="modal-title" class="font-headline-md text-2xl text-zinc-100 mb-6 flex items-center gap-2">
+        <span class="material-symbols-outlined text-primary" aria-hidden="true">tune</span>
         Nueva Afinación
       </h2>
       
@@ -110,7 +110,7 @@
           </div>
         </div>
 
-        <button (click)="saveCustomPreset()" class="w-full py-3.5 rounded-xl font-bold tracking-widest bg-primary text-on-primary hover:bg-primary/90 transition-colors shadow-[0_0_20px_rgba(84,233,138,0.2)] mt-2">
+        <button (click)="saveCustomPreset()" class="w-full py-3.5 rounded-xl font-bold tracking-widest bg-primary text-on-primary hover:bg-primary/90 transition-colors shadow-[0_0_20px_rgba(84,233,138,0.2)] mt-2" aria-label="Guardar preset personalizado">
           GUARDAR PRESET
         </button>
       </div>
@@ -120,8 +120,8 @@
     <div *ngIf="pickingNoteForIndex !== null" class="absolute inset-0 bg-surface-container p-6 flex flex-col z-10 transition-all">
       <div class="flex items-center justify-between mb-6">
         <h3 class="font-headline-md text-xl text-zinc-100">Cuerda {{ pickingNoteForIndex + 1 }}</h3>
-        <button (click)="closeNotePicker()" class="w-8 h-8 flex items-center justify-center rounded-full bg-surface-container-high text-zinc-400 hover:text-zinc-100 transition-colors">
-          <span class="material-symbols-outlined text-xl">close</span>
+        <button (click)="closeNotePicker()" class="w-8 h-8 flex items-center justify-center rounded-full bg-surface-container-high text-zinc-400 hover:text-zinc-100 transition-colors" aria-label="Cerrar selector de nota">
+          <span class="material-symbols-outlined text-xl" aria-hidden="true">close</span>
         </button>
       </div>
       <p class="text-zinc-400 font-body-md mb-6">Selecciona el tono deseado.</p>

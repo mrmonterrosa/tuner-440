@@ -11,6 +11,8 @@
   <meta name="keywords" content="afinador de guitarra, afinador online, afinador bajo, afinador profesional, tuner 440, metrónomo online, afinaciones alternativas, drop d, open g">
   <meta name="author" content="Carlos Gonzalez Monterrosa">
   <meta name="robots" content="index, follow">
+  <meta name="theme-color" content="#121212">
+  <link rel="canonical" href="https://mrmonterrosa.github.io/tuner-440/">
 
   <!-- Open Graph / Facebook -->
   <meta property="og:type" content="website">
@@ -18,24 +20,74 @@
   <meta property="og:title" content="Tuner 440 | Afinador Profesional Minimalista">
   <meta property="og:description" content="Afina tu instrumento con precisión quirúrgica en tu navegador. Una herramienta elegante impulsada por IA.">
   <meta property="og:image" content="https://mrmonterrosa.github.io/tuner-440/og-image.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:locale" content="es_ES">
+  <meta property="og:site_name" content="Tuner 440">
 
   <!-- Twitter -->
-  <meta property="twitter:card" content="summary_large_image">
-  <meta property="twitter:url" content="https://mrmonterrosa.github.io/tuner-440/">
-  <meta property="twitter:title" content="Tuner 440 | Afinador Profesional Minimalista">
-  <meta property="twitter:description" content="Afina tu instrumento con precisión quirúrgica en tu navegador. Una herramienta elegante impulsada por IA.">
-  <meta property="twitter:image" content="https://mrmonterrosa.github.io/tuner-440/og-image.png">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:url" content="https://mrmonterrosa.github.io/tuner-440/">
+  <meta name="twitter:title" content="Tuner 440 | Afinador Profesional Minimalista">
+  <meta name="twitter:description" content="Afina tu instrumento con precisión quirúrgica en tu navegador. Una herramienta elegante impulsada por IA.">
+  <meta name="twitter:image" content="https://mrmonterrosa.github.io/tuner-440/og-image.png">
+
+  <!-- Preconnect for performance -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 
   <link rel="icon" type="image/x-icon" href="favicon.ico">
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet"/>
   <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+
+  <!-- Structured Data (JSON-LD) -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebApplication",
+    "name": "Tuner 440",
+    "url": "https://mrmonterrosa.github.io/tuner-440/",
+    "description": "Afinador de guitarra profesional, minimalista y gratuito. Afina con precisión quirúrgica desde tu navegador.",
+    "applicationCategory": "MusicApplication",
+    "operatingSystem": "Any",
+    "offers": {
+      "@type": "Offer",
+      "price": "0",
+      "priceCurrency": "USD"
+    },
+    "author": {
+      "@type": "Person",
+      "name": "Carlos Gonzalez Monterrosa",
+      "url": "https://mrmonterrosa.com"
+    }
+  }
+  </script>
 </head>
 <body class="bg-background text-on-background min-h-screen flex flex-col font-body-md">
   <app-root></app-root>
   
-  <!-- Global Buy Me a Coffee Button -->
-  <div style="position: fixed; top: 12px; left: 50%; z-index: 100; transform: translateX(-50%) scale(0.75); transform-origin: top center; filter: drop-shadow(0 4px 6px rgba(0,0,0,0.3));">
-    <script type="text/javascript" src="https://cdnjs.buymeacoffee.com/1.0.0/button.prod.min.js" data-name="bmc-button" data-slug="mrmonterrosa" data-color="#FFDD00" data-emoji=""  data-font="Cookie" data-text="Buy me a coffee" data-outline-color="#000000" data-font-color="#000000" data-coffee-color="#ffffff" ></script>
-  </div>
+  <!-- Buy Me a Coffee: loaded AFTER Angular bootstrap to avoid blocking FCP -->
+  <script>
+    window.addEventListener('load', function() {
+      setTimeout(function() {
+        var d = document.createElement('div');
+        d.id = 'bmc-container';
+        d.style.cssText = 'position:fixed;top:12px;left:50%;z-index:100;transform:translateX(-50%) scale(0.75);transform-origin:top center;filter:drop-shadow(0 4px 6px rgba(0,0,0,0.3))';
+        document.body.appendChild(d);
+        var s = document.createElement('script');
+        s.src = 'https://cdnjs.buymeacoffee.com/1.0.0/button.prod.min.js';
+        s.setAttribute('data-name', 'bmc-button');
+        s.setAttribute('data-slug', 'mrmonterrosa');
+        s.setAttribute('data-color', '#FFDD00');
+        s.setAttribute('data-emoji', '');
+        s.setAttribute('data-font', 'Cookie');
+        s.setAttribute('data-text', 'Buy me a coffee');
+        s.setAttribute('data-outline-color', '#000000');
+        s.setAttribute('data-font-color', '#000000');
+        s.setAttribute('data-coffee-color', '#ffffff');
+        d.appendChild(s);
+      }, 2000);
+    });
+  </script>
 </body>
 </html>
