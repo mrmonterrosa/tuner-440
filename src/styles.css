@@ -1,0 +1,26 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.glass-overlay {
+    background: rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+}
+.strobe-glow {
+    box-shadow: 0 0 20px rgba(46, 204, 113, 0.4);
+}
+.needle-transition {
+    transition: transform 0.15s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+input[type="range"]::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 24px;
+    height: 24px;
+    background: #3498DB;
+    border-radius: 50%;
+    cursor: pointer;
+    box-shadow: 0 0 10px rgba(52, 152, 219, 0.5);
+}

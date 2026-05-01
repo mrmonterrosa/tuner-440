@@ -1,0 +1,75 @@
+<main class="flex-1 flex flex-col items-center justify-between px-container-margin pt-12 pb-24 overflow-y-auto min-h-screen">
+  
+  <div class="w-full flex justify-center mt-6">
+     <div class="flex items-center gap-2 transition-colors duration-300" [ngClass]="tunerState().isTuning ? 'text-primary' : 'text-zinc-600'">
+        <div class="w-1.5 h-1.5 rounded-full" [ngClass]="tunerState().isTuning ? 'bg-primary animate-pulse shadow-[0_0_8px_#54e98a]' : 'bg-zinc-600'"></div>
+        <span class="font-label-caps tracking-widest text-[10px] font-bold">{{ tunerState().isTuning ? 'ESCUCHANDO' : 'EN ESPERA' }}</span>
+     </div>
+  </div>
+
+  <div class="w-full flex flex-col items-center relative mt-16 mb-8">
+    
+    <div class="relative w-[340px] h-[170px] flex items-end justify-center">
+      
+      <!-- b and # markers -->
+      <span class="absolute left-2 bottom-4 text-zinc-500 font-serif text-2xl">b</span>
+      <span class="absolute right-2 bottom-4 text-zinc-500 font-serif text-2xl">#</span>
+
+      <!-- SVG Arc -->
+      <svg class="absolute bottom-0 w-full h-[170px]" viewBox="0 0 200 100" style="overflow: visible;">
+        <!-- Pills -->
+        <line *ngFor="let seg of segments" 
+              [attr.stroke]="activeSegmentIndex === seg ? (isPerfectPitch ? '#54e98a' : '#ffffff') : '#353534'" 
+              stroke-width="10" 
+              stroke-linecap="round"
+              [style.transform]="'rotate(' + (seg * 16) + 'deg)'" 
+              style="transform-origin: 100px 100px; transition: stroke 0.1s ease-out;" 
+              x1="100" x2="100" y1="18" y2="34"></line>
+              
+        <!-- Center Triangle -->
+        <polygon points="90,14 110,14 100,32" 
+                 [attr.fill]="activeSegmentIndex === 0 && tunerState().isTuning ? '#54e98a' : '#353534'"
+                 [attr.filter]="activeSegmentIndex === 0 && tunerState().isTuning ? 'drop-shadow(0 0 8px rgba(84,233,138,0.6))' : ''"
+                 style="transition: fill 0.1s ease-out; transform-origin: 100px 100px;"></polygon>
+      </svg>
+      
+      <!-- Huge Note Text inside the Arc -->
+      <div class="absolute bottom-2 flex flex-col items-center justify-center">
+        <div class="flex items-baseline">
+          <span class="font-display-pitch text-[90px] font-bold tracking-tighter leading-none transition-colors duration-300" 
+                [ngClass]="isPerfectPitch ? 'text-primary drop-shadow-[0_0_25px_rgba(84,233,138,0.3)]' : (tunerState().isTuning ? 'text-zinc-100' : 'text-zinc-800')">
+            {{ tunerState().note || '-' }}
+          </span>
+          <span class="text-4xl text-zinc-400 font-bold ml-1 mb-2">{{ tunerState().octave !== null ? tunerState().octave : '' }}</span>
+        </div>
+      </div>
+    </div>
+    
+    <!-- Instruction Text under the arc -->
+    <div class="h-8 flex items-center justify-center mt-6">
+      <span class="text-zinc-400 font-body-md text-lg transition-colors duration-300" 
+            [ngClass]="isPerfectPitch ? 'text-primary' : 'text-zinc-400'">
+        {{ instructionText }}
+      </span>
+    </div>
+  </div>
+
+  <div class="w-full flex flex-col items-center mt-auto">
+    <span class="font-mono text-zinc-600 text-[10px] tracking-widest mb-6 opacity-60">{{ tunerState().frequency | number:'1.1-1' }} HZ</span>
+    <div class="w-full flex justify-center gap-3 px-base flex-wrap" >
+      <button *ngFor="let str of currentStrings()" 
+              class="w-11 h-11 flex items-center justify-center rounded-full transition-all duration-300 border-2" 
+              [ngClass]="tunerState().note.toLowerCase() === str.toLowerCase() && tunerState().isTuning ? 'bg-primary/10 text-primary border-primary/50 shadow-[0_0_15px_rgba(84,233,138,0.2)] scale-110' : 'bg-surface-container border-transparent text-zinc-500'">
+        <span class="font-bold text-sm">{{ str }}</span>
+      </button>
+    </div>
+  </div>
+</main>
+
+<div class="fixed bottom-28 right-6 z-50">
+  <button class="w-14 h-14 rounded-[9999px] flex items-center justify-center shadow-lg active:scale-95 transition-transform" 
+          [ngClass]="tunerState().isTuning ? 'bg-surface-container-high text-zinc-400 border border-zinc-700/50' : 'bg-primary text-on-primary shadow-[0_0_20px_rgba(84,233,138,0.2)]'"
+          (click)="toggleTuner()">
+    <span class="material-symbols-outlined text-3xl">{{ tunerState().isTuning ? 'mic_off' : 'mic' }}</span>
+  </button>
+</div>

@@ -1,0 +1,32 @@
+<header class="bg-[#121212]/90 backdrop-blur-lg flex justify-between items-center px-6 h-16 w-full border-b border-zinc-800/50 fixed top-0 z-50">
+  <div class="font-headline-md text-xl font-bold tracking-tighter text-zinc-100">Tuner 440</div>
+  <div class="flex gap-4 items-center">
+    <button class="transition-colors" [ngClass]="tunerState().isTuning ? 'text-primary' : 'text-zinc-500 hover:text-zinc-200'">
+      <span class="material-symbols-outlined" data-icon="mic">mic</span>
+    </button>
+    <a routerLink="/settings" routerLinkActive="text-[#2ECC71]" [routerLinkActiveOptions]="{exact: true}" class="text-zinc-500 hover:text-zinc-200 transition-colors flex items-center">
+      <span class="material-symbols-outlined" data-icon="settings">settings</span>
+    </a>
+  </div>
+</header>
+
+<router-outlet></router-outlet>
+
+<nav class="fixed bottom-0 left-0 w-full z-50 flex justify-around items-center px-4 h-20 pb-safe bg-[#121212]/90 backdrop-blur-lg border-t border-zinc-800/50">
+  <a routerLink="/tuner" routerLinkActive="text-[#3498DB] bg-blue-500/10" class="flex flex-col items-center justify-center text-zinc-500 rounded-xl px-3 py-1 transition-colors" [class.hover:text-zinc-300]="true">
+    <span class="material-symbols-outlined" data-icon="tune">tune</span>
+    <span class="font-sans text-[10px] font-semibold uppercase tracking-widest mt-1">Afinador</span>
+  </a>
+  <a routerLink="/library" routerLinkActive="text-[#3498DB] bg-blue-500/10" class="flex flex-col items-center justify-center text-zinc-500 rounded-xl px-3 py-1 transition-colors" [class.hover:text-zinc-300]="true">
+    <span class="material-symbols-outlined" data-icon="library_music">library_music</span>
+    <span class="font-sans text-[10px] font-semibold uppercase tracking-widest mt-1">Biblioteca</span>
+  </a>
+  <a routerLink="/metronome" routerLinkActive="text-[#3498DB] bg-blue-500/10" class="flex flex-col items-center justify-center text-zinc-500 rounded-xl px-3 py-1 transition-colors" [class.hover:text-zinc-300]="true">
+    <span class="material-symbols-outlined" data-icon="metronome">timer</span>
+    <span class="font-sans text-[10px] font-semibold uppercase tracking-widest mt-1">Metrónomo</span>
+  </a>
+  <a routerLink="/settings" routerLinkActive="text-[#3498DB] bg-blue-500/10" class="flex flex-col items-center justify-center text-zinc-500 rounded-xl px-3 py-1 transition-colors" [class.hover:text-zinc-300]="true">
+    <span class="material-symbols-outlined" data-icon="settings">tune</span>
+    <span class="font-sans text-[10px] font-semibold uppercase tracking-widest mt-1">Ajustes</span>
+  </a>
+</nav>

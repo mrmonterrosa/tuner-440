@@ -1,0 +1,84 @@
+<main class="flex-grow pt-24 pb-32 px-container-margin max-w-2xl mx-auto w-full min-h-screen">
+  <div class="mb-lg">
+    <h1 class="font-headline-lg text-headline-lg mb-base text-on-surface">Configuración</h1>
+    <p class="text-on-surface-variant font-body-md">Ajusta tu equipo para una precisión quirúrgica.</p>
+  </div>
+  <section class="space-y-md">
+    <!-- Instrument Selection -->
+    <div class="glass-overlay p-md rounded-xl border border-zinc-800/50">
+      <label class="font-label-caps text-label-caps text-secondary uppercase mb-sm block">Tipo de Instrumento</label>
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-sm">
+        <button (click)="setInstrument('Acústica')" 
+                [ngClass]="settingsState().instrumentType === 'Acústica' ? 'bg-secondary-container/20 border-secondary-container text-secondary' : 'bg-surface-container hover:bg-surface-container-high border-transparent text-on-surface-variant'"
+                class="flex flex-col items-center justify-center p-md border-2 rounded-xl">
+          <span class="material-symbols-outlined text-3xl mb-xs">straighten</span>
+          <span class="font-body-md font-semibold">Acústica</span>
+        </button>
+        <button (click)="setInstrument('Eléctrica')"
+                [ngClass]="settingsState().instrumentType === 'Eléctrica' ? 'bg-secondary-container/20 border-secondary-container text-secondary' : 'bg-surface-container hover:bg-surface-container-high border-transparent text-on-surface-variant'"
+                class="flex flex-col items-center justify-center p-md border-2 rounded-xl">
+          <span class="material-symbols-outlined text-3xl mb-xs">electric_bolt</span>
+          <span class="font-body-md">Eléctrica</span>
+        </button>
+        <button (click)="setInstrument('Bajo')"
+                [ngClass]="settingsState().instrumentType === 'Bajo' ? 'bg-secondary-container/20 border-secondary-container text-secondary' : 'bg-surface-container hover:bg-surface-container-high border-transparent text-on-surface-variant'"
+                class="flex flex-col items-center justify-center p-md border-2 rounded-xl">
+          <span class="material-symbols-outlined text-3xl mb-xs">music_note</span>
+          <span class="font-body-md">Bajo</span>
+        </button>
+      </div>
+    </div>
+    <!-- Number of Strings -->
+    <div class="glass-overlay p-md rounded-xl border border-zinc-800/50">
+      <label class="font-label-caps text-label-caps text-secondary uppercase mb-sm block">Número de Cuerdas</label>
+      <div class="flex gap-sm">
+        <button (click)="setStringCount(6)"
+                [ngClass]="settingsState().stringCount === 6 ? 'bg-secondary-container/10 border-secondary-container text-secondary' : 'bg-surface-container hover:bg-surface-container-high border-transparent text-on-surface-variant'"
+                class="flex-1 py-md border-2 rounded-xl font-bold text-headline-md">6</button>
+        <button (click)="setStringCount(7)"
+                [ngClass]="settingsState().stringCount === 7 ? 'bg-secondary-container/10 border-secondary-container text-secondary' : 'bg-surface-container hover:bg-surface-container-high border-transparent text-on-surface-variant'"
+                class="flex-1 py-md border-2 rounded-xl font-bold text-headline-md">7</button>
+        <button (click)="setStringCount(8)"
+                [ngClass]="settingsState().stringCount === 8 ? 'bg-secondary-container/10 border-secondary-container text-secondary' : 'bg-surface-container hover:bg-surface-container-high border-transparent text-on-surface-variant'"
+                class="flex-1 py-md border-2 rounded-xl font-bold text-headline-md">8</button>
+      </div>
+    </div>
+    <!-- Mic Sensitivity -->
+    <div class="glass-overlay p-md rounded-xl border border-zinc-800/50">
+      <div class="flex justify-between items-end mb-md">
+        <div>
+          <label class="font-label-caps text-label-caps text-secondary uppercase block">Sensibilidad del Mic</label>
+          <p class="text-xs text-on-surface-variant mt-xs">Evita el ruido ambiental alto.</p>
+        </div>
+        <span class="font-display-pitch text-2xl text-secondary">{{ settingsState().micSensitivity }}%</span>
+      </div>
+      <div class="relative py-md">
+        <div class="absolute top-1/2 -translate-y-1/2 left-0 right-0 h-2 bg-surface-container-highest rounded-full pointer-events-none"></div>
+        <div class="absolute top-1/2 -translate-y-1/2 left-0 h-2 bg-secondary-container rounded-full pointer-events-none" 
+             [style.width]="'calc(12px + (100% - 24px) * ' + (settingsState().micSensitivity / 100) + ')'"></div>
+        <input class="w-full h-2 bg-transparent appearance-none cursor-pointer relative z-10" 
+               style="background: transparent;"
+               max="100" min="0" type="range" 
+               [value]="settingsState().micSensitivity" 
+               (input)="onSensitivityChange($event)"/>
+      </div>
+      <div class="flex justify-between text-[10px] text-zinc-600 font-bold uppercase tracking-widest mt-base">
+        <span>Mínima</span>
+        <span>Óptima</span>
+        <span>Máxima</span>
+      </div>
+    </div>
+    <!-- Visual Context Image -->
+    <div class="relative h-48 rounded-xl overflow-hidden group">
+      <img alt="Guitar studio environment" class="w-full h-full object-cover opacity-40 group-hover:opacity-60 transition-opacity" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCHOewxOzS0pTD620lNcaABZgTBisCjKJdgVvXh3bnZozOxnfd2rJmCPY-UeOdQV4w309r1JKjbwT1AOf3-Lc0dUhnMJ0RtMSkPrdeKJ6BFiRDi6RrWZYa5tlCXiKqN2cnRV4EiAgD1RjvBU1o1sM3pvgKa4GpsiczBU2WaVt8AU7kykJlKNm1pWr4rKKWgbXpXiYUvCcrwpGMzYAqHR0wmKcgY_gzD5PHIy9_17IXsVtuxDoN8LGmvtaVAiXADafSG2MrS4IEHMkk"/>
+      <div class="absolute inset-0 bg-gradient-to-t from-background via-transparent to-transparent"></div>
+      <div class="absolute bottom-md left-md">
+        <p class="font-label-caps text-primary">Estado del Dispositivo</p>
+        <div class="flex items-center gap-xs mt-xs">
+          <span class="w-2 h-2 rounded-full bg-primary animate-pulse"></span>
+          <span class="text-xs text-on-surface">Micrófono Interno Activo</span>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
