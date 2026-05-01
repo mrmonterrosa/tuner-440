@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://mrmonterrosa.github.io/tuner-440/sitemap.xml
